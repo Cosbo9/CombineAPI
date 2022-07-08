@@ -9,14 +9,24 @@
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
-  config.navigational_formats = []
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = '5a5ff2e017f2f1cd6e52f283659b729dfb9a09a8ae33550b11f7c0391f5a49cfd47c09daaec86b7acefc5681b12837ef2f372a6d9a225c5a3c34dab028a1707e'
-
+  # config.secret_key = '553a0fbda1cb1b0b6dd4591df33fb19054f66e05ca9a3355c39e51ee777232c5fbc897178a9b252bba23431af4a357e3b69c13148df1d2985ac9ea07f54b6ee9'
+  config.jwt do |jwt|
+    jwt.secret = 'unicorn'
+    jwt.dispatch_requests = [
+      ['POST', %r{^/login$}],
+      ['POST', %r{^/signup$}]
+    ]
+    jwt.revocation_requests = [
+      ['DELETE', %r{^/logout$}]
+    ]
+    jwt.expiration_time = 30.minutes.to_i
+  end
+  # config.skip_session_storage = [:http_auth, :jwt]
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
   # config.parent_controller = 'DeviseController'
@@ -98,7 +108,7 @@ Devise.setup do |config|
   # Notice that if you are skipping storage for all authentication paths, you
   # may want to disable generating routes to Devise's sessions controller by
   # passing skip: :sessions to `devise_for` in your config/routes.rb
-  config.skip_session_storage = [:http_auth]
+  # config.skip_session_storage = [:http_auth]
 
   # By default, Devise cleans up the CSRF token on authentication to
   # avoid CSRF token fixation attacks. This means that, when using AJAX
@@ -127,7 +137,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 12
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = '6b63bdd6e2940c5b3279769decd8a216767681f406c4c90bd343047482f3555e318f0e26ad4bc07ee6926e6fb5afcd2fb8823fd3871e46d0a20187ea4718fc20'
+  # config.pepper = '20a837e03c08ed41fb1aa524d53b722cf80406f38a75eb53dc7e2b037b149a5258f5a7411fb89c22eeef5e5e6c0f01c12ff8aab362f1ba2c024e1696c4ace2c2'
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false
