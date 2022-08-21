@@ -10,11 +10,11 @@ Rails.application.routes.draw do
   }
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-      post "game", to: "game#create"
-      post "game/join", to: "game#join"
-      post "game/play", to: "game#play_move"
-      get "game/:game_id", to: "game#get"
-      get "games", to: "game#get_all_games"
+      post "game", to: "games#create"
+      post "game/join", to: "games#join"
+      post "game/play", to: "games#play_move"
+      get "game/:game_id", to: "games#get"
+      get "games", to: "games#get_all_games"
       # post "message", to: "messages#create"
       post "game/message", to: "messages#send_game_message"
       post "lobby/message", to: "messages#send_lobby_message"
