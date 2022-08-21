@@ -1,4 +1,4 @@
-class Api::V1::GameController < ApplicationController
+class GameController < ApplicationController
   def create
     if user_signed_in?
       user = current_user

@@ -1,4 +1,4 @@
-class Api::V1::MessagesController < ApplicationController
+class MessagesController < ApplicationController
 
   before_action :authenticate_user!, except: :send_game_message
 

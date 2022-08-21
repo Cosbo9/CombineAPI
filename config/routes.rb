@@ -9,8 +9,7 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-  namespace :api do
-    namespace :v1 do
+
       post "game", to: "game#create"
       post "game/join", to: "game#join"
       post "game/play", to: "game#play_move"
@@ -20,8 +19,6 @@ Rails.application.routes.draw do
       post "game/message", to: "messages#send_game_message"
       post "lobby/message", to: "messages#send_lobby_message"
 
-    end
-  end
 
   mount ActionCable.server => "/cable"
 end
